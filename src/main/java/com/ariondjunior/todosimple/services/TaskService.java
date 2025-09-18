@@ -1,5 +1,6 @@
 package com.ariondjunior.todosimple.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,24 @@ public class TaskService {
         ));
     }
 
+    public List<Task> findAllByUserId(Long userId) {
+        List<Task> tasks = this.taskRepository.findByUser_Id(userId);
+        return tasks;
+    }
+
     @Transactional
     public Task create(Task obj) {
         User user = this.userService.findById(obj.getUser().getId());
         obj.setId(null);
         obj.setUser(user);
+        obj = this.taskRepository.save(obj);
         return obj;
     }
 
     @Transactional
     public Task update(Task obj) {
         Task newObj = findById(obj.getId());
-        newObj.setDescripition(obj.getDescripition());
+        newObj.setDescription(obj.getDescription());
         return this.taskRepository.save(newObj);
     }
 

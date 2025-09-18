@@ -30,7 +30,7 @@ public class Task {
     @NotNull
     @NotEmpty
     @Size(min = 1, max = 255)
-    private String descripition;
+    private String description;
 
     public Task() {
     }
@@ -38,7 +38,7 @@ public class Task {
     public Task(Long id, User user, String descripition) {
         this.id = id;
         this.user = user;
-        this.descripition = descripition;
+        this.description = descripition;
     }
 
     public Long getId() {
@@ -57,12 +57,12 @@ public class Task {
         this.user = user;
     }
 
-    public String getDescripition() {
-        return descripition;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripition(String descripition) {
-        this.descripition = descripition;
+    public void setDescription(String descripition) {
+        this.description = descripition;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Task {
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((user == null) ? 0 : user.hashCode());
-        result = prime * result + ((descripition == null) ? 0 : descripition.hashCode());
+        result = prime * result + ((description == null) ? 0 : description.hashCode());
         return result;
     }
 
@@ -94,10 +94,10 @@ public class Task {
                 return false;
         } else if (!user.equals(other.user))
             return false;
-        if (descripition == null) {
-            if (other.descripition != null)
+        if (description == null) {
+            if (other.description != null)
                 return false;
-        } else if (!descripition.equals(other.descripition))
+        } else if (!description.equals(other.description))
             return false;
         return true;
     }    

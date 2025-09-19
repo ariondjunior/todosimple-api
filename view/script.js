@@ -28,14 +28,19 @@ function show(tasks) {
 
 
 async function getAPI(url) {
-    const response = await fetch(url, {method: "GET"});
-
-    var data = await response.json();
-    console.log(data);
-
-    if(response) { hideLoeader() }
-
-    show(data);
+    try {
+        const response = await fetch(url, {method: "GET"});
+        var data = await response.json();
+        console.log(data);
+        show(data);
+    } catch (err) {
+        console.error('Erro ao buscar API:', err);
+        // opcional: mostrar mensagem ao usuário
+        document.getElementById('tasks').innerHTML = '<tr><td colspan="5">Erro ao carregar tarefas</td></tr>';
+    } finally {
+        // garante que o loader seja escondido
+        if(document.getElementById('loading')) { hideLoeader(); }
+    }
 }
 
 getAPI(url);
